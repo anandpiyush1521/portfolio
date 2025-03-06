@@ -64,7 +64,7 @@ export default function Sidebar() {
                 />
               </div>
             </div>
-            <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">Piyush Anand</h2>
+            <a href="/"><h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">Piyush Anand</h2></a>
             <div className="flex items-center justify-center mt-1">
               <span className="inline-block h-2 w-2 rounded-full bg-green-500 mr-2 animate-pulse"></span>
               <p className="text-gray-300">Backend Developer</p>
