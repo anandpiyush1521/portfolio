@@ -11,7 +11,7 @@ const projects = [
     description:
       "A high-quality inventory management system developed using Java, focusing on efficient stock tracking and management solutions.",
     image: invenquity,
-    technologies: ["Java", "React.js", "Spring Boot", "MySQL"],
+    technologies: ["Java", "Spring Boot", "React.js", "Tailwind CSS", "MySQL"],
     demoUrl: "https://github.com/anandpiyush1521/Invenquity",
     githubUrl: "https://github.com/anandpiyush1521/Invenquity",
   },
@@ -20,7 +20,7 @@ const projects = [
     description:
       "A full-stack contact management web application built using Spring Boot and React, allowing users to manage and store their contacts efficiently.",
     image: smartContactManager,
-    technologies: ["Spring Boot", "React.js", "MySQL", "Cloudinary"],
+    technologies: ["Spring Boot", "Tailwinds Css", "MySQL", "Cloudinary"],
     demoUrl: "https://github.com/anandpiyush1521/SmartContactManager",
     githubUrl: "https://github.com/anandpiyush1521/SmartContactManager",
   },
@@ -46,7 +46,7 @@ const projects = [
     title: 'DSA Repository',
     description: 'A collection of Data Structures and Algorithms solutions in Java, covering problems from LeetCode, Codeforces, and other coding platforms.',
     image: dsaRepo,
-    technologies: ['Java', 'DSA', 'LeetCode', 'Codeforces'],
+    technologies: ['Java', 'DSA', 'LeetCode', 'Graph', 'Trees', 'Arrays', 'Linked List'],
     demoUrl: 'https://github.com/anandpiyush1521/DSA',
     githubUrl: 'https://github.com/anandpiyush1521/DSA',
   },
