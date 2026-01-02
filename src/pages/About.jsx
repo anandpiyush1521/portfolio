@@ -36,32 +36,43 @@ export default function About() {
           }`}
         >
           <p className="text-lg text-gray-300 mb-6">
-            I'm a{" "}
+            I'm an{" "}
             <span className="font-semibold text-blue-400">
-              backend-focused full-stack developer
+              adaptable software engineer
             </span>{" "}
-            with expertise in designing and building scalable, high-performance
-            applications. My passion for software development is driven by a
-            deep understanding of{" "}
+            with expertise spanning{" "}
             <span className="font-semibold text-blue-400">
-              backend architectures, API development, database optimization
+              safety-critical aerospace systems
+            </span>{" "}
+            and{" "}
+            <span className="font-semibold text-blue-400">
+              scalable enterprise applications
             </span>
-            , and writing efficient, maintainable code.
+            . Currently working at{" "}
+            <span className="font-semibold text-blue-400">Honeywell</span>, I
+            specialize in designing and building high-reliability avionics
+            software and robust backend architectures.
           </p>
-          <p className="text-lg text-gray-300">
-            I specialize in{" "}
+          <p className="text-lg text-gray-300 mb-6">
+            Proficient in{" "}
             <span className="font-semibold text-blue-400">
-              Java, Spring Boot, Python, SQL
-            </span>
-            , and have hands-on experience with modern full-stack frameworks
-            like{" "}
+              modern C++ for aerospace systems
+            </span>{" "}
+            and{" "}
             <span className="font-semibold text-blue-400">
-              Node.js, Express, React, and Next.js
-            </span>
-            . I enjoy solving complex problems, optimizing backend workflows,
-            and creating robust, secure applications that power seamless user
-            experiences.
+              Java, Spring Boot, and SQL
+            </span>{" "}
+            for building high-performance RESTful APIs and microservices. I'm
+            passionate about solving complex system design challenges,
+            optimizing backend performance, implementing security best
+            practices, and delivering maintainable, production-grade code.
           </p>
+          <div className="flex items-center gap-2 text-blue-400">
+            <span className="inline-block w-2 h-2 bg-blue-400 rounded-full"></span>
+            <span className="text-sm font-semibold">
+              Honeywell Bravo Award Recipient for "Drive Accountability"
+            </span>
+          </div>
         </div>
 
         {/* Skills Section */}
@@ -70,28 +81,98 @@ export default function About() {
             isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
           }`}
         >
-          <h3 className="text-xl font-bold mb-4 text-white">
+          <h3 className="text-xl font-bold mb-6 text-white">
             Skills & Technologies
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {[
-              "Java",
-              "Spring Boot",
-              "Python",
-              "SQL & PostgreSQL",
-              "MongoDB",
-              "Node.js & Express.js",
-              "React & Next.js",
-              "Docker & Kubernetes",
-              "Cloud & Firebase",
-            ].map((skill, index) => (
-              <span
-                key={index}
-                className="bg-gray-900/60 border border-gray-700/50 rounded-lg p-3 text-center text-blue-400 hover:bg-gray-800 transition-colors duration-300 text-sm"
-              >
-                {skill}
-              </span>
-            ))}
+          <div className="space-y-4">
+            <div>
+              <p className="text-blue-400 text-sm font-semibold mb-2">
+                Languages
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {["Java", "C++", "Python", "JavaScript"].map((skill, index) => (
+                  <span
+                    key={index}
+                    className="bg-gray-900/60 border border-gray-700/50 rounded-lg p-3 text-center text-gray-300 hover:bg-gray-800 hover:text-blue-400 transition-all duration-300 text-sm"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="text-blue-400 text-sm font-semibold mb-2">
+                Backend & APIs
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {[
+                  "Spring Boot",
+                  "Spring Security",
+                  "Node.js",
+                  "Express.js",
+                  "REST APIs",
+                  "JWT",
+                  "OAuth2",
+                  "Microservices",
+                ].map((skill, index) => (
+                  <span
+                    key={index}
+                    className="bg-gray-900/60 border border-gray-700/50 rounded-lg p-3 text-center text-gray-300 hover:bg-gray-800 hover:text-blue-400 transition-all duration-300 text-sm"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="text-blue-400 text-sm font-semibold mb-2">
+                Frontend & Tools
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {[
+                  "React.js",
+                  "Next.js",
+                  "Thymeleaf",
+                  "Tailwind CSS",
+                  "Docker",
+                  "Git",
+                  "Postman",
+                  "SCADE",
+                ].map((skill, index) => (
+                  <span
+                    key={index}
+                    className="bg-gray-900/60 border border-gray-700/50 rounded-lg p-3 text-center text-gray-300 hover:bg-gray-800 hover:text-blue-400 transition-all duration-300 text-sm"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="text-blue-400 text-sm font-semibold mb-2">
+                Databases & Cloud
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {[
+                  "PostgreSQL",
+                  "MySQL",
+                  "MongoDB",
+                  "Cloudinary",
+                  "Firebase",
+                  "TLS/Encryption",
+                ].map((skill, index) => (
+                  <span
+                    key={index}
+                    className="bg-gray-900/60 border border-gray-700/50 rounded-lg p-3 text-center text-gray-300 hover:bg-gray-800 hover:text-blue-400 transition-all duration-300 text-sm"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -124,7 +205,7 @@ export default function About() {
                     Post Graduate in Advanced Computing
                   </h4>
                   <p className="text-gray-400">C-DAC, Bengaluru</p>
-                  <p className="text-gray-500 text-sm">2024-25</p>
+                  <p className="text-gray-500 text-sm">2024-25 | 71%</p>
                 </div>
               </li>
               <li className="relative">
@@ -134,7 +215,7 @@ export default function About() {
                     Bachelor of Technology (CSE)
                   </h4>
                   <p className="text-gray-400">Galgotias University</p>
-                  <p className="text-gray-500 text-sm">2020 - 2024</p>
+                  <p className="text-gray-500 text-sm">2020 - 2024 | CGPA: 8.66</p>
                 </div>
               </li>
             </ul>
@@ -164,21 +245,29 @@ export default function About() {
               <li className="relative">
                 <div className="absolute w-0.5 h-full bg-gradient-to-b from-blue-500 to-purple-600 left-0 -ml-2 opacity-70"></div>
                 <div className="pl-4">
+                  <h4 className="font-semibold text-white text-base">
+                    Software Engineer 1
+                  </h4>
+                  <p className="text-blue-400 text-sm font-medium">Honeywell</p>
+                  <p className="text-gray-500 text-sm mb-2">Apr 2025 – Present</p>
+                  <ul className="list-disc list-inside text-gray-300 text-xs space-y-1">
+                    <li>Enhanced AOC datalink services for Flight Management Systems</li>
+                    <li>Resolved complex race conditions for reliable UI state management</li>
+                    <li>Honeywell Bravo Award for Drive Accountability</li>
+                  </ul>
+                </div>
+              </li>
+              <li className="relative">
+                <div className="absolute w-0.5 h-full bg-gradient-to-b from-blue-500 to-purple-600 left-0 -ml-2 opacity-70"></div>
+                <div className="pl-4">
                   <h4 className="font-semibold text-white">
                     Java Developer Intern
                   </h4>
-                  <p className="text-gray-400">Datafoundry</p>
-                  <p className="text-gray-500 text-sm mb-2">2024</p>
-                  <ul className="list-disc list-inside text-gray-300 text-sm space-y-1">
-                    <li>
-                      Designed and developed RESTful APIs using Spring Boot with
-                      PostgreSQL for efficient data management.
-                    </li>
-                    <li>
-                      Implemented secure user authentication and authorization,
-                      ensuring robust access control and seamless user
-                      experience.
-                    </li>
+                  <p className="text-gray-400 text-sm">Datafoundry</p>
+                  <p className="text-gray-500 text-sm mb-2">Apr 2024 – Jul 2024</p>
+                  <ul className="list-disc list-inside text-gray-300 text-xs space-y-1">
+                    <li>Developed RESTful APIs with Spring Boot & PostgreSQL</li>
+                    <li>Implemented JasperReports for dynamic patient reports</li>
                   </ul>
                 </div>
               </li>
@@ -209,13 +298,13 @@ export default function About() {
             </div>
             <h3 className="text-xl font-bold text-white">Projects</h3>
           </div>
-          <ul className="space-y-8">
-            <li className="backdrop-blur-sm bg-gray-900/40 rounded-lg p-6 hover:bg-gray-900/60 transition-colors duration-300 border border-gray-800/50">
-              <h4 className="font-semibold text-lg text-white mb-1">
-                Smart Contact Manager
+          <ul className="space-y-6">
+            <li className="backdrop-blur-sm bg-gray-900/40 rounded-lg p-6 hover:bg-gray-900/60 transition-colors duration-300 border border-gray-800/50 group">
+              <h4 className="font-semibold text-lg text-white mb-1 group-hover:text-blue-400 transition-colors">
+                Inventory Management System
               </h4>
               <div className="flex flex-wrap gap-2 mb-3">
-                {["Spring Boot", "SQL", "OAuth2", "Cloudinary"].map(
+                {["Spring Boot", "PostgreSQL", "JWT", "RBAC"].map(
                   (tech, index) => (
                     <span
                       key={index}
@@ -226,14 +315,50 @@ export default function About() {
                   )
                 )}
               </div>
-              <p className="text-gray-300 text-sm">
-                Built a secure authentication system with Spring Security,
-                integrated OAuth2 login, and optimized database queries for
-                efficient contact management.
+              <p className="text-gray-300 text-sm mb-3">
+                Built a secure role-based access control (RBAC) system using JWT
+                with Spring Security. Optimized RESTful APIs achieving 25%
+                reduction in response time and implemented TLS encryption for
+                secure communications.
               </p>
+              <ul className="list-disc list-inside text-gray-400 text-xs space-y-1">
+                <li>Role-based authentication with JWT tokens</li>
+                <li>Optimized queries using ConcurrentHashMap</li>
+                <li>TLS encryption for data protection</li>
+              </ul>
             </li>
-            <li className="backdrop-blur-sm bg-gray-900/40 rounded-lg p-6 hover:bg-gray-900/60 transition-colors duration-300 border border-gray-800/50">
-              <h4 className="font-semibold text-lg text-white mb-1">
+
+            <li className="backdrop-blur-sm bg-gray-900/40 rounded-lg p-6 hover:bg-gray-900/60 transition-colors duration-300 border border-gray-800/50 group">
+              <h4 className="font-semibold text-lg text-white mb-1 group-hover:text-blue-400 transition-colors">
+                Smart Contact Manager
+              </h4>
+              <div className="flex flex-wrap gap-2 mb-3">
+                {["Spring Boot", "OAuth2", "SQL", "Cloudinary"].map(
+                  (tech, index) => (
+                    <span
+                      key={index}
+                      className="px-2 py-1 bg-blue-900/30 text-blue-400 text-xs rounded-full border border-blue-700/50"
+                    >
+                      {tech}
+                    </span>
+                  )
+                )}
+              </div>
+              <p className="text-gray-300 text-sm mb-3">
+                Engineered a full-featured contact management platform with
+                OAuth2-based authentication, email verification, and optimized
+                SQL indexing. Designed responsive UI increasing user engagement
+                by 30%.
+              </p>
+              <ul className="list-disc list-inside text-gray-400 text-xs space-y-1">
+                <li>OAuth2 authentication with email verification</li>
+                <li>Full CRUD operations with advanced search</li>
+                <li>Responsive UI with Thymeleaf & Tailwind CSS</li>
+              </ul>
+            </li>
+
+            <li className="backdrop-blur-sm bg-gray-900/40 rounded-lg p-6 hover:bg-gray-900/60 transition-colors duration-300 border border-gray-800/50 group">
+              <h4 className="font-semibold text-lg text-white mb-1 group-hover:text-blue-400 transition-colors">
                 NishLiving
               </h4>
               <div className="flex flex-wrap gap-2 mb-3">
@@ -248,13 +373,67 @@ export default function About() {
                   )
                 )}
               </div>
-              <p className="text-gray-300 text-sm">
+              <p className="text-gray-300 text-sm mb-3">
                 Developed a full-stack property listing and booking platform
-                with secure authentication, efficient image storage, and email
-                notifications.
+                with secure JWT authentication, efficient image storage via
+                Cloudinary, and email notifications for seamless user experience.
               </p>
+              <ul className="list-disc list-inside text-gray-400 text-xs space-y-1">
+                <li>Secure JWT-based authentication</li>
+                <li>MongoDB for scalable data management</li>
+                <li>Email notifications and image optimization</li>
+              </ul>
             </li>
           </ul>
+        </div>
+
+        {/* Certifications Section */}
+        <div
+          className={`backdrop-blur-sm bg-gray-800/30 border border-gray-700/50 rounded-xl shadow-xl p-8 mt-8 transform transition-all duration-700 delay-500 ease-out ${
+            isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+          }`}
+        >
+          <h3 className="text-xl font-bold text-white mb-4">
+            Certifications & Achievements
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="flex items-center gap-3 p-3 bg-gray-900/40 rounded-lg border border-gray-800/50">
+              <span className="text-2xl">🏆</span>
+              <div>
+                <p className="font-semibold text-blue-400 text-sm">
+                  Honeywell Bravo Award
+                </p>
+                <p className="text-gray-400 text-xs">Drive Accountability</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 p-3 bg-gray-900/40 rounded-lg border border-gray-800/50">
+              <span className="text-2xl">✓</span>
+              <div>
+                <p className="font-semibold text-blue-400 text-sm">
+                  Problem Solving
+                </p>
+                <p className="text-gray-400 text-xs">HackerRank</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 p-3 bg-gray-900/40 rounded-lg border border-gray-800/50">
+              <span className="text-2xl">✓</span>
+              <div>
+                <p className="font-semibold text-blue-400 text-sm">
+                  Java Full Stack Development
+                </p>
+                <p className="text-gray-400 text-xs">Wipro TalentNext</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 p-3 bg-gray-900/40 rounded-lg border border-gray-800/50">
+              <span className="text-2xl">👥</span>
+              <div>
+                <p className="font-semibold text-blue-400 text-sm">
+                  GSSoC Mentor
+                </p>
+                <p className="text-gray-400 text-xs">Open Source Contributor</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
