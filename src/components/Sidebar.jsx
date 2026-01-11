@@ -20,6 +20,7 @@ export default function Sidebar() {
   useEffect(() => {
     const index = navItems.findIndex(item => item.path === location.pathname);
     setActiveIndex(index >= 0 ? index : 0);
+    setIsOpen(false); // Close sidebar when navigating
   }, [location]);
 
   return (
@@ -41,7 +42,7 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-40 w-72 bg-gradient-to-b from-gray-900 to-gray-950 text-white border-r border-gray-800/70 shadow-xl transform transition-all duration-300 ease-out ${
+        className={`fixed inset-y-0 left-0 z-40 w-64 bg-gradient-to-b from-gray-900 to-gray-950 text-white border-r border-gray-800/70 shadow-xl transform transition-all duration-300 ease-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } md:translate-x-0`}
       >
@@ -73,11 +74,11 @@ export default function Sidebar() {
 
           {/* Navigation with animation indicator */}
           <nav className="flex-1 px-5 py-2 relative">
-            <div className="absolute h-12 my-1 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-xl transition-all duration-300 backdrop-blur-sm border-l-2 border-blue-500"
-                style={{
-                  transform: `translateY(${activeIndex * 48}px)`,
-                  width: '94%'
-                }}
+            <div 
+              className="absolute h-12 w-[calc(100%-2.5rem)] left-5 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-xl transition-all duration-300 ease-out backdrop-blur-sm border-l-2 border-blue-500"
+              style={{
+                transform: `translateY(${activeIndex * 56}px)`,
+              }}
             ></div>
             
             {navItems.map(({ path, icon: Icon, label }, index) => (
