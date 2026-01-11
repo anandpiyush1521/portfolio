@@ -35,7 +35,7 @@ export default function Home() {
           </h1>
 
           <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-            A dedicated Backend Developer with a strong focus on building scalable and efficient server-side applications. Experienced in designing robust APIs, optimizing database performance, and ensuring seamless integration with frontend systems.
+            A dedicated Software Engineer with a strong focus on building scalable and efficient server-side applications. Experienced in designing robust APIs, optimizing database performance, and ensuring seamless integration with frontend systems.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
@@ -76,7 +76,7 @@ export default function Home() {
 
                 {/* Tech stack badges - matching sidebar styling */}
                 <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
-                  {['Java', 'Spring Boot', 'PostgreSQL', 'React', 'Express'].map((tech) => (
+                  {['Java', 'Spring Boot', 'C++', 'PostgreSQL', 'React', 'Express'].map((tech) => (
                     <span key={tech} className="px-3 py-1 bg-gray-900/80 backdrop-blur-sm text-blue-400 text-xs font-medium rounded-full border border-gray-700/50">
                       {tech}
                     </span>
