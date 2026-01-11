@@ -67,7 +67,7 @@ export default function Contact() {
     {
       name: "LinkedIn",
       icon: Linkedin,
-      url: "https://linkedin.com/in/piyushanand",
+      url: "https://www.linkedin.com/in/whopiyushanand",
       color: "hover:text-blue-400",
     },
   ];
