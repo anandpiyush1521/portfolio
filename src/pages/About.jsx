@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 export default function About() {
   const [isVisible, setIsVisible] = useState(false);
@@ -8,15 +9,23 @@ export default function About() {
   }, []);
 
   return (
-    <div className="min-h-screen p-6 pt-12 pb-20 bg-gradient-to-b from-gray-900 to-gray-950 text-white">
-      {/* Background elements */}
+    <div className="min-h-screen p-6 pt-12 pb-20 bg-gradient-to-b from-gray-900 to-gray-950 text-white relative overflow-hidden">
+      {/* Animated Background Gradients - Same as Home Page */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-40 left-20 w-64 h-64 bg-blue-500 rounded-full filter blur-3xl opacity-10 animate-pulse"></div>
-        <div className="absolute bottom-20 right-20 w-80 h-80 bg-purple-500 rounded-full filter blur-3xl opacity-10 animate-pulse"></div>
+        <motion.div
+          animate={{ y: [0, -30, 0], opacity: [0.2, 0.3, 0.2] }}
+          transition={{ duration: 10, repeat: Infinity }}
+          className="absolute top-32 left-16 w-72 h-72 bg-blue-500 rounded-full filter blur-[120px]"
+        ></motion.div>
+        <motion.div
+          animate={{ y: [0, 30, 0], opacity: [0.2, 0.3, 0.2] }}
+          transition={{ duration: 12, repeat: Infinity }}
+          className="absolute bottom-10 right-20 w-96 h-96 bg-purple-600 rounded-full filter blur-[140px]"
+        ></motion.div>
       </div>
 
       {/* Subtle grid pattern overlay */}
-      <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:50px_50px]"></div>
+      <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:50px_50px] pointer-events-none"></div>
 
       <div className="max-w-4xl mx-auto relative z-10">
         <div
@@ -184,7 +193,7 @@ export default function About() {
             Certifications & Achievements
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="flex items-center gap-3 p-3 bg-gray-900/40 rounded-lg border border-gray-800/50">
+            <div className="flex items-center gap-3 p-3 bg-gray-900/40 rounded-lg border border-gray-800/50 hover:border-blue-500/50 transition-all duration-300">
               <span className="text-2xl">🏆</span>
               <div>
                 <p className="font-semibold text-blue-400 text-sm">
@@ -193,7 +202,7 @@ export default function About() {
                 <p className="text-gray-400 text-xs">Drive Accountability</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 p-3 bg-gray-900/40 rounded-lg border border-gray-800/50">
+            <div className="flex items-center gap-3 p-3 bg-gray-900/40 rounded-lg border border-gray-800/50 hover:border-blue-500/50 transition-all duration-300">
               <span className="text-2xl">✓</span>
               <div>
                 <p className="font-semibold text-blue-400 text-sm">
@@ -202,7 +211,7 @@ export default function About() {
                 <p className="text-gray-400 text-xs">HackerRank</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 p-3 bg-gray-900/40 rounded-lg border border-gray-800/50">
+            <div className="flex items-center gap-3 p-3 bg-gray-900/40 rounded-lg border border-gray-800/50 hover:border-blue-500/50 transition-all duration-300">
               <span className="text-2xl">✓</span>
               <div>
                 <p className="font-semibold text-blue-400 text-sm">
@@ -211,7 +220,7 @@ export default function About() {
                 <p className="text-gray-400 text-xs">Wipro TalentNext</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 p-3 bg-gray-900/40 rounded-lg border border-gray-800/50">
+            <div className="flex items-center gap-3 p-3 bg-gray-900/40 rounded-lg border border-gray-800/50 hover:border-blue-500/50 transition-all duration-300">
               <span className="text-2xl">👥</span>
               <div>
                 <p className="font-semibold text-blue-400 text-sm">
