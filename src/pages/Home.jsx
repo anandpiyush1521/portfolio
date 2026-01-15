@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import adGif from '../assets/AD.gif';
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
@@ -66,7 +67,7 @@ export default function Home() {
             <div className="relative p-1 rounded-xl overflow-hidden bg-gradient-to-r from-blue-500 to-purple-600">
               <div className="relative rounded-lg overflow-hidden bg-gray-900">
                 <img
-                  src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600"
+                  src={adGif}
                   alt="Developer"
                   className="w-full rounded-lg shadow-2xl object-cover transition-all duration-500 group-hover:scale-105"
                 />
