@@ -27,7 +27,7 @@ export default function Home() {
         <div className={`flex-1 transform transition-all duration-1000 ease-out ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-16 opacity-0'}`}>
           <div className="flex items-center mb-4">
             <div className="inline-block px-4 py-1 bg-blue-900/20 backdrop-blur-sm rounded-full border border-blue-700/50 text-blue-400 text-sm font-medium">
-              Backend Developer
+              Software Developer
             </div>
           </div>
 
