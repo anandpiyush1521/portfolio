@@ -214,9 +214,9 @@ export default function Skills() {
       >
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { label: "Years Experience", value: "4+" },
-            { label: "Projects Completed", value: "15+" },
-            { label: "Technologies", value: "30+" },
+            { label: "Years Experience", value: "1.5+" },
+            { label: "Projects Completed", value: "10+" },
+            { label: "Technologies", value: "15+" },
             { label: "Award Recipient", value: "✓" },
           ].map((stat, index) => (
             <motion.div
