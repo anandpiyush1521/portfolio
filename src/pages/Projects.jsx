@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import nishDcexImg from "../assets/nishDcex.png";
+import smartContactManagerImg from "../assets/smartContactManager.png";
+import living from "../assets/nishliving.png";
+import dsaImg from "../assets/dsaRepo.png";
 
 const projects = [
   {
@@ -17,7 +21,7 @@ const projects = [
     title: "Smart Contact Manager",
     description:
       "Full-featured contact management platform with OAuth2 authentication, advanced search capabilities, and cloud-based image storage. Intuitive UI for effortless contact organization.",
-    image: "https://images.unsplash.com/photo-1555707462-c2b59d7cb64e?w=500&h=300&fit=crop",
+    image: smartContactManagerImg,
     technologies: ["Spring Boot", "React", "Tailwind CSS", "MySQL", "Cloudinary", "OAuth2"],
     demoUrl: "https://github.com/anandpiyush1521/SmartContactManager",
     githubUrl: "https://github.com/anandpiyush1521/SmartContactManager",
@@ -25,10 +29,10 @@ const projects = [
     category: "Full Stack",
   },
   {
-    title: "Nish-Dcex",
+    title: "Dcex",
     description:
       "Decentralized cryptocurrency exchange platform built on Solana blockchain. Enables fast, secure peer-to-peer trading with smart contract integration and real-time price feeds.",
-    image: "https://images.unsplash.com/photo-1516354928771-14e42b8d3d51?w=500&h=300&fit=crop",
+    image: nishDcexImg,
     technologies: ["Next.js", "Solana", "Anchor", "Tailwind CSS", "Web3"],
     demoUrl: "https://github.com/anandpiyush1521/Nish-Dcex",
     githubUrl: "https://github.com/anandpiyush1521/Nish-Dcex",
@@ -39,7 +43,7 @@ const projects = [
     title: "NishLiving",
     description:
       "Modern property listing and booking platform with user authentication, property filtering, reviews system, and integrated payment processing for seamless bookings.",
-    image: "https://images.unsplash.com/photo-1460925895917-adf4198f5e7e?w=500&h=300&fit=crop",
+    image: living,
     technologies: ["React", "Express.js", "MongoDB", "Cloudinary", "JWT", "Node.js"],
     demoUrl: "https://github.com/anandpiyush1521/NishLiving",
     githubUrl: "https://github.com/anandpiyush1521/NishLiving",
@@ -50,7 +54,7 @@ const projects = [
     title: "DSA Repository",
     description:
       "Comprehensive collection of Data Structures and Algorithms solutions in Java. Covers LeetCode problems, competitive programming challenges, and complex algorithmic patterns with detailed explanations.",
-    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop",
+    image: dsaImg,
     technologies: ["Java", "DSA", "LeetCode", "Graphs", "Trees", "Dynamic Programming"],
     demoUrl: "https://github.com/anandpiyush1521/DSA",
     githubUrl: "https://github.com/anandpiyush1521/DSA",
