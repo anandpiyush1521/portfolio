@@ -42,7 +42,7 @@ const blogPosts = [
     readTime: "3 hr read",
     category: ["Machine Learning", "Python", "NLP"],
     image:  polarityImg,
-    link: "https://bvicam.in/INDIACom/IJRMS/downloads/pdf/issue2/4. pdf",
+    link: "https://bvicam.in/INDIACom/IJRMS/downloads/pdf/issue2/4.pdf",
   },
   {
     title: "Number of Nodes in the Sub-Tree With the Same Label",
@@ -836,3 +836,4 @@ export default function Blog() {
     </div>
   );
 }
+
