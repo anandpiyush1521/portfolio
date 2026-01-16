@@ -1,6 +1,8 @@
 import React, { useState, useMemo, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, Clock, ExternalLink, Search, X, ChevronDown, Filter, Check, Tag } from "lucide-react";
+import { Calendar, Clock, ExternalLink, Search, X, ChevronDown, Filter, Check, Tag, Heart, MessageCircle, Send, User } from "lucide-react";
+import { db } from "../firebase/config";
+import { doc, getDoc, setDoc, updateDoc, arrayUnion, arrayRemove, onSnapshot } from "firebase/firestore";
 import glassImg from "../assets/glass.png"
 import polarityImg from "../assets/polarity.png"
 import autopilotImg from "../assets/autopilot.jpeg"
@@ -144,8 +146,168 @@ const BlogCard = ({ post, index, onReadMore }) => {
   );
 };
 
+// Helper function to generate post ID
+const getPostId = (title) => title.replace(/\s+/g, '-').toLowerCase().replace(/[^a-z0-9-]/g, '');
+
 // Blog Preview Modal Component
 const BlogPreviewModal = ({ post, isOpen, onClose }) => {
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
+  const [commenterName, setCommenterName] = useState("");
+  const [showComments, setShowComments] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [userId] = useState(() => {
+    // Generate or get a unique user ID for like tracking
+    let id = localStorage.getItem('blog-user-id');
+    if (!id) {
+      id = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+      localStorage.setItem('blog-user-id', id);
+    }
+    return id;
+  });
+
+  // Real-time listener for Firebase data
+  useEffect(() => {
+    if (!post || !isOpen) return;
+    
+    const postId = getPostId(post.title);
+    const postRef = doc(db, 'blog-interactions', postId);
+    
+    // Set up real-time listener
+    const unsubscribe = onSnapshot(postRef, (docSnap) => {
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        setLikeCount(data.likeCount || 0);
+        setComments(data.comments || []);
+        setIsLiked((data.likedBy || []).includes(userId));
+      } else {
+        setLikeCount(0);
+        setComments([]);
+        setIsLiked(false);
+      }
+      setIsLoading(false);
+    }, (error) => {
+      console.error("Error fetching data:", error);
+      setIsLoading(false);
+      // Fallback to localStorage if Firebase fails
+      const storedLikes = localStorage.getItem(`blog-likes-${postId}`);
+      const storedUserLiked = localStorage.getItem(`blog-user-liked-${postId}`);
+      const storedComments = localStorage.getItem(`blog-comments-${postId}`);
+      if (storedLikes) setLikeCount(parseInt(storedLikes));
+      if (storedUserLiked) setIsLiked(storedUserLiked === 'true');
+      if (storedComments) setComments(JSON.parse(storedComments));
+    });
+
+    return () => unsubscribe();
+  }, [post, isOpen, userId]);
+
+  const handleLike = async () => {
+    if (!post) return;
+    const postId = getPostId(post.title);
+    const postRef = doc(db, 'blog-interactions', postId);
+    
+    try {
+      const docSnap = await getDoc(postRef);
+      
+      if (isLiked) {
+        // Unlike
+        if (docSnap.exists()) {
+          await updateDoc(postRef, {
+            likeCount: Math.max(0, (docSnap.data().likeCount || 1) - 1),
+            likedBy: arrayRemove(userId)
+          });
+        }
+      } else {
+        // Like
+        if (docSnap.exists()) {
+          await updateDoc(postRef, {
+            likeCount: (docSnap.data().likeCount || 0) + 1,
+            likedBy: arrayUnion(userId)
+          });
+        } else {
+          await setDoc(postRef, {
+            postTitle: post.title,
+            likeCount: 1,
+            likedBy: [userId],
+            comments: []
+          });
+        }
+      }
+    } catch (error) {
+      console.error("Error updating like:", error);
+      // Fallback to localStorage
+      const newLiked = !isLiked;
+      const newCount = newLiked ? likeCount + 1 : Math.max(0, likeCount - 1);
+      setIsLiked(newLiked);
+      setLikeCount(newCount);
+      localStorage.setItem(`blog-likes-${postId}`, newCount.toString());
+      localStorage.setItem(`blog-user-liked-${postId}`, newLiked.toString());
+    }
+  };
+
+  const handleAddComment = async () => {
+    if (!newComment.trim() || !commenterName.trim() || !post) return;
+    
+    const postId = getPostId(post.title);
+    const postRef = doc(db, 'blog-interactions', postId);
+    
+    const comment = {
+      id: Date.now().toString(),
+      name: commenterName.trim(),
+      text: newComment.trim(),
+      date: new Date().toISOString(),
+      userId: userId
+    };
+
+    try {
+      const docSnap = await getDoc(postRef);
+      
+      if (docSnap.exists()) {
+        await updateDoc(postRef, {
+          comments: arrayUnion(comment)
+        });
+      } else {
+        await setDoc(postRef, {
+          postTitle: post.title,
+          likeCount: 0,
+          likedBy: [],
+          comments: [comment]
+        });
+      }
+      setNewComment("");
+    } catch (error) {
+      console.error("Error adding comment:", error);
+      // Fallback to localStorage
+      const updatedComments = [...comments, comment];
+      setComments(updatedComments);
+      localStorage.setItem(`blog-comments-${postId}`, JSON.stringify(updatedComments));
+      setNewComment("");
+    }
+  };
+
+  const handleDeleteComment = async (commentToDelete) => {
+    if (!post) return;
+    // Only allow user to delete their own comments
+    if (commentToDelete.userId !== userId) return;
+    
+    const postId = getPostId(post.title);
+    const postRef = doc(db, 'blog-interactions', postId);
+    
+    try {
+      await updateDoc(postRef, {
+        comments: arrayRemove(commentToDelete)
+      });
+    } catch (error) {
+      console.error("Error deleting comment:", error);
+      // Fallback to localStorage
+      const updatedComments = comments.filter(c => c.id !== commentToDelete.id);
+      setComments(updatedComments);
+      localStorage.setItem(`blog-comments-${postId}`, JSON.stringify(updatedComments));
+    }
+  };
+
   if (!isOpen || !post) return null;
 
   const handleReadOriginal = () => {
@@ -173,7 +335,7 @@ const BlogPreviewModal = ({ post, isOpen, onClose }) => {
             transition={{ type: "spring", duration: 0.5 }}
             className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none"
           >
-            <div className="relative bg-gradient-to-br from-gray-900 to-gray-950 border border-gray-700/50 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto pointer-events-auto">
+            <div className="relative bg-gradient-to-br from-gray-900 to-gray-950 border border-gray-700/50 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto pointer-events-auto custom-scrollbar">
               {/* Close Button */}
               <button
                 onClick={onClose}
@@ -224,6 +386,136 @@ const BlogPreviewModal = ({ post, isOpen, onClose }) => {
                 <p className="text-gray-300 text-sm leading-relaxed mb-4">
                   {post.excerpt}
                 </p>
+
+                {/* Like and Comment Section */}
+                <div className="flex items-center gap-4 mb-4">
+                  {isLoading ? (
+                    <div className="flex items-center gap-2 text-gray-500 text-sm">
+                      <div className="w-4 h-4 border-2 border-gray-600 border-t-blue-500 rounded-full animate-spin"></div>
+                      Loading...
+                    </div>
+                  ) : (
+                    <>
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={handleLike}
+                        className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 ${
+                          isLiked 
+                            ? 'bg-red-500/20 text-red-400 border border-red-500/50' 
+                            : 'bg-gray-800/50 text-gray-400 border border-gray-700/50 hover:border-red-500/50 hover:text-red-400'
+                        }`}
+                      >
+                        <Heart size={18} className={isLiked ? 'fill-red-400' : ''} />
+                        <span className="text-sm font-medium">{likeCount}</span>
+                      </motion.button>
+
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => setShowComments(!showComments)}
+                        className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 ${
+                          showComments 
+                            ? 'bg-blue-500/20 text-blue-400 border border-blue-500/50' 
+                            : 'bg-gray-800/50 text-gray-400 border border-gray-700/50 hover:border-blue-500/50 hover:text-blue-400'
+                        }`}
+                      >
+                        <MessageCircle size={18} />
+                        <span className="text-sm font-medium">{comments.length}</span>
+                      </motion.button>
+                    </>
+                  )}
+                </div>
+
+                {/* Comments Section */}
+                <AnimatePresence>
+                  {showComments && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="mb-4 overflow-hidden"
+                    >
+                      <div className="bg-gray-800/30 rounded-xl border border-gray-700/50 p-4">
+                        <h4 className="text-sm font-semibold text-gray-300 mb-3 flex items-center gap-2">
+                          <MessageCircle size={16} className="text-blue-400" />
+                          Comments ({comments.length})
+                        </h4>
+
+                        {/* Comment Input */}
+                        <div className="space-y-3 mb-4">
+                          <input
+                            type="text"
+                            placeholder="Your name"
+                            value={commenterName}
+                            onChange={(e) => setCommenterName(e.target.value)}
+                            className="w-full px-3 py-2 bg-gray-900/50 border border-gray-700/50 rounded-lg text-white text-sm placeholder-gray-500 focus:outline-none focus:border-blue-500/50 transition-all duration-300"
+                          />
+                          <div className="flex gap-2">
+                            <input
+                              type="text"
+                              placeholder="Write a comment..."
+                              value={newComment}
+                              onChange={(e) => setNewComment(e.target.value)}
+                              onKeyPress={(e) => e.key === 'Enter' && handleAddComment()}
+                              className="flex-1 px-3 py-2 bg-gray-900/50 border border-gray-700/50 rounded-lg text-white text-sm placeholder-gray-500 focus:outline-none focus:border-blue-500/50 transition-all duration-300"
+                            />
+                            <motion.button
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={handleAddComment}
+                              disabled={!newComment.trim() || !commenterName.trim()}
+                              className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                              <Send size={16} />
+                            </motion.button>
+                          </div>
+                        </div>
+
+                        {/* Comments List */}
+                        <div className="space-y-3 max-h-48 overflow-y-auto custom-scrollbar">
+                          {comments.length === 0 ? (
+                            <p className="text-gray-500 text-sm text-center py-4">
+                              No comments yet. Be the first to comment!
+                            </p>
+                          ) : (
+                            comments.map((comment) => (
+                              <motion.div
+                                key={comment.id}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="bg-gray-900/50 rounded-lg p-3 border border-gray-700/30"
+                              >
+                                <div className="flex items-start justify-between gap-2">
+                                  <div className="flex items-center gap-2 mb-1">
+                                    <div className="w-6 h-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
+                                      <User size={12} className="text-white" />
+                                    </div>
+                                    <span className="text-sm font-medium text-blue-400">{comment.name}</span>
+                                    <span className="text-xs text-gray-500">
+                                      {new Date(comment.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                                    </span>
+                                  </div>
+                                  {comment.userId === userId && (
+                                    <button
+                                      onClick={() => handleDeleteComment(comment)}
+                                      className="text-gray-500 hover:text-red-400 transition-colors"
+                                      title="Delete your comment"
+                                    >
+                                      <X size={14} />
+                                    </button>
+                                  )}
+                                </div>
+                                <p className="text-gray-300 text-sm pl-8">{comment.text}</p>
+                              </motion.div>
+                            ))
+                          )}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
                 {/* Divider */}
                 <div className="h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent mb-4"></div>
