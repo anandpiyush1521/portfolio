@@ -138,7 +138,7 @@ export default function Home() {
                     <span className="text-gray-300"> </span>
                     <span className="text-purple-400">class</span>
                     <span className="text-gray-300"> Deploy </span>
-                    <span className="text-gray-400">{"{}"}</span>
+                    <span className="text-gray-400">{"{"}</span>
                   </div>
                   <div
                     className="animate-fadeInUp pl-4"
@@ -152,7 +152,7 @@ export default function Home() {
                     <span className="text-gray-300"> main(</span>
                     <span className="text-blue-400">String</span>
                     <span className="text-gray-300">[] args) </span>
-                    <span className="text-gray-400">{"{}"}</span>
+                    <span className="text-gray-400">{"{"}</span>
                   </div>
                   <div
                     className="animate-fadeInUp pl-8"
