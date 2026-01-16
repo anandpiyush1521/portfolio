@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, Clock, ExternalLink, Search, X, ChevronDown, Filter, Check, Tag } from "lucide-react";
 import glassImg from "../assets/glass.png"
 import polarityImg from "../assets/polarity.png"
+import autopilotImg from "../assets/autopilot.jpeg"
 
 const blogPosts = [
   {
@@ -11,8 +12,8 @@ const blogPosts = [
     date: "2026-01-16",
     readTime: "20 min read",
     category:  ["Aviation Technology", "Flight Pilot Simulator ", "STEM"],
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=500&h=300&fit=crop",
-    link: "https://medium.com/@piyushanand2580/area-of-rectangle-with-longest-diagonal-0be6bbb51137",
+    image: autopilotImg,
+    link: "https://medium.com/@piyushanand2580/decoding-the-skies-autopilot-system-explanation-904a57b91d3e",
   },
   {
     title: "Area of Rectangle with Longest Diagonal",
